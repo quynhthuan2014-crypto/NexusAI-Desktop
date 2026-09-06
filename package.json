@@ -1,0 +1,46 @@
+{
+  "name": "nexusai-desktop",
+  "version": "0.1.0",
+  "description": "A privacy-conscious AI desktop workspace with tools, memory, voice, vision, and permissions.",
+  "main": "dist-electron/main.js",
+  "author": "NexusAI",
+  "license": "Apache-2.0",
+  "scripts": {
+    "dev": "concurrently -k \"vite\" \"wait-on http://127.0.0.1:5173 && electron .\"",
+    "build": "tsc -b && vite build && electron-builder",
+    "build:web": "tsc -b && vite build",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "tsc -b --pretty false",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "4.3.4",
+    "electron": "36.3.2",
+    "electron-builder": "26.0.12",
+    "lucide-react": "0.468.0",
+    "react": "19.0.0",
+    "react-dom": "19.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "22.10.2",
+    "@types/react": "19.0.0",
+    "@types/react-dom": "19.0.0",
+    "concurrently": "9.1.2",
+    "typescript": "5.8.2",
+    "vite": "6.1.0",
+    "vitest": "3.0.5",
+    "wait-on": "8.0.3",
+    "jsdom": "26.0.0"
+  },
+  "build": {
+    "appId": "com.nexusai.desktop",
+    "productName": "NexusAI Desktop",
+    "directories": { "output": "release" },
+    "files": ["dist/**", "dist-electron/**", "package.json"],
+    "win": { "target": "nsis" },
+    "nsis": { "oneClick": false, "allowToChangeInstallationDirectory": true },
+    "mac": { "target": "dmg" },
+    "linux": { "target": "AppImage" }
+  }
+}
